@@ -20,6 +20,7 @@ namespace ariel {
 
 
     OrgChart &OrgChart::add_root(string s) {
+//        check empty string or other invalid string input
         if (s.empty() || s== " " || s== "\n" || s=="\t"){
             throw invalid_argument("invalid string for root");
         }
@@ -38,7 +39,9 @@ namespace ariel {
     }
 
     bool OrgChart::add_sub_check(const string &s1, const string &s2, node *root) {
+//        recursive method to check if s1 is in the OrgChart
         bool x = false;
+//        check if its the node itself
         if (root->value == s1) {
             node *new_node = new node();
             new_node->value = s2;
@@ -46,6 +49,7 @@ namespace ariel {
             this->Nodes.push_back(new_node);
             return true;
         }
+        //        check if its one of the children of node
         vector<node *> sons_of_root = root->sons;
         if (!sons_of_root.empty()) {
             for (node *s: sons_of_root) {
@@ -55,10 +59,12 @@ namespace ariel {
                 }
             }
         }
+//        else s1 its not in the OrgChart
         return x;
     }
 
-    std::ostream &operator<<(std::ostream &output, const OrgChart &o) {
+    std::ostream &operator<<(std::ostream &output, const OrgChart &o){
+        output<<"To see Your OrgChart You can go to one of the iterators!!!!";
         return output;
     }
 
