@@ -16,12 +16,13 @@ namespace ariel {
 
 
     OrgChart &OrgChart::add_root(string s) {
-        this->root.value = s;
+        this->root.value = move(s);
         return *this;
     }
 
-    OrgChart &OrgChart::add_sub(string s1, string s2) {
-        bool b = add_sub_check(s1, s2, &root);
+    OrgChart &OrgChart::add_sub(const string &s1, const string &s2) {
+        bool b = false;
+        b = add_sub_check(s1, s2, &root);
         if (b) {
             return *this;
         }
@@ -29,7 +30,7 @@ namespace ariel {
 //        return *this;
     }
 
-    bool OrgChart::add_sub_check(string s1, string s2, node *root) {
+    bool OrgChart::add_sub_check(const string &s1, const string &s2, node *root) {
         bool x = false;
         if (root->value == s1) {
             node *new_node = new node();
@@ -37,11 +38,11 @@ namespace ariel {
             root->sons.push_back(new_node);
             return true;
         }
-        vector <node*> sons_of_root = root->sons;
-        if (!sons_of_root.empty()){
-            for (node* s: sons_of_root){
-                x= add_sub_check(s1,s2,s);
-                if (x==true){
+        vector<node *> sons_of_root = root->sons;
+        if (!sons_of_root.empty()) {
+            for (node *s: sons_of_root) {
+                x = add_sub_check(s1, s2, s);
+                if (x) {
                     return true;
                 }
             }

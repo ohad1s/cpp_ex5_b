@@ -34,9 +34,9 @@ namespace ariel {
 
         OrgChart &add_root(string s);
 
-        OrgChart &add_sub(string s1, string s2);
+        OrgChart &add_sub(const string &s1, const string &s2);
 
-        bool add_sub_check(string s1, string s2, node *root);
+        bool add_sub_check(const string &s1,  const string &s2, node *root);
 
         friend std::ostream &operator<<(std::ostream &output, const OrgChart &o);
 
