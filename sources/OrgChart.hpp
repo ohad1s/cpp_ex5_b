@@ -27,6 +27,7 @@ namespace ariel {
         } node;
 
         node root;
+        vector<node*>Nodes;
 
         OrgChart();
 

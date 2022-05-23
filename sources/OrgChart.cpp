@@ -12,10 +12,17 @@ namespace ariel {
     OrgChart::OrgChart() {
     }
 
-    OrgChart::~OrgChart() {}
+    OrgChart::~OrgChart() {
+        for(node* n: this->Nodes){
+            delete n;
+        }
+    }
 
 
     OrgChart &OrgChart::add_root(string s) {
+        if (s.empty() || s== " " || s== "\n" || s=="\t"){
+            throw invalid_argument("invalid string for root");
+        }
         this->root.value = move(s);
         return *this;
     }
@@ -36,6 +43,7 @@ namespace ariel {
             node *new_node = new node();
             new_node->value = s2;
             root->sons.push_back(new_node);
+            this->Nodes.push_back(new_node);
             return true;
         }
         vector<node *> sons_of_root = root->sons;
