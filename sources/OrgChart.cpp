@@ -21,7 +21,7 @@ namespace ariel {
 
     OrgChart &OrgChart::add_root(string s) {
 //        check empty string or other invalid string input
-        if (s.empty() || s== " " || s== "\n" || s=="\t"){
+        if (s.empty() || s== " " || s== "\n" || s=="\t" || s=="\r"){
             throw invalid_argument("invalid string for root");
         }
         this->root.value = move(s);
@@ -29,6 +29,12 @@ namespace ariel {
     }
 
     OrgChart &OrgChart::add_sub(const string &s1, const string &s2) {
+        if (s2.empty() || s2== " " || s2== "\n" || s2=="\t" || s2=="\r"){
+            throw invalid_argument("invalid string for son");
+        }
+        if (s1.empty() || s1== " " || s1== "\n" || s1=="\t" || s1=="\r"){
+            throw invalid_argument("invalid string for father");
+        }
         bool b = false;
         b = add_sub_check(s1, s2, &root);
         if (b) {
